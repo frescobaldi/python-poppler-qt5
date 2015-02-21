@@ -1,5 +1,5 @@
 TODO:
-
+- make demo.py working with PyQt5
 
 DONE:
 - Poppler::Document::newFontIterator() is usable as Python iterable
