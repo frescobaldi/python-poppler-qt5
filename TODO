@@ -1,0 +1,12 @@
+TODO:
+
+
+DONE:
+- Poppler::Document::newFontIterator() is usable as Python iterable
+- Poppler::HighlightAnnotation::Quad.points has been fixed
+- support Poppler::InkAnnotation::inkPaths() and setInkPaths()
+- cast returned lists of objects like Document::links() to their respective types
+- convert to and from QLinkedList
+- test Python versions other than 2.6: 3.2.3 works
+- add some examples: demo.py added
+

@@ -1,0 +1,5 @@
+version.sip
+*.pyc
+*~
+build/
+dist/

@@ -1,0 +1,6 @@
+Version 0.28.0 -- 
+
+* Initial release, converted from the python-poppler-qt4 code.
+* Disabled the methods that use QDomNode, QDomDocument and QDomElement types,
+  those are unfortunately not supported by PyQt5.
+

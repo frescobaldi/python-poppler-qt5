@@ -1,0 +1,62 @@
+Installation:
+=============
+
+
+python-poppler-qt5 installs a single Python module named 'popplerqt5'.
+
+The setup script uses distutils. Use the following commands to build and install
+the module:
+
+python setup.py build
+python setup.py install
+
+To install in /usr instead of /usr/local:
+
+python setup.py install --prefix /usr
+
+
+Troubleshooting:
+================
+
+The setup script uses pkg-config to determine the version of the installed
+poppler-qt5 library. Methods or classes that are not in the installed poppler-
+qt5 library will then also be disabled in the Python binding.
+
+If your system does not provide pkg-config, you can manually specify the poppler
+version to use with the --poppler-version option, e.g.:
+
+python setup.py build_ext --poppler-version=0.14.0
+
+Note that for these options to work you need the 'build_ext' command rather than
+the 'build' command.
+
+You may then also need the --include-dirs and --library-dirs options to the
+build_ext command if the correct poppler-qt5 header files and libraries can't
+be found.
+
+See the output of
+
+python setup.py --help build_ext
+
+for more options.
+
+If you have a Debian-based system such as Ubuntu, and you get the error
+message "ImportError: No module named popplerqt5", try:
+
+python setup.py install --install-layout=deb
+
+See the distutils documentation for more install options.
+
+
+Dependencies:
+=============
+
+- sip 4.9.1 or newer
+- poppler-qt5 0.12.0 or newer (poppler-qt5 is part of poppler)
+- Qt5
+- PyQt5
+- Python (tested with 2.6)
+
+To build the popplerqt5 module, header files of Qt5 and poppler-qt5 and sip
+files of PyQt5 are needed (sometimes packaged separately in corresponding -dev
+packages).
