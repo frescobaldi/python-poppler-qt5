@@ -53,6 +53,22 @@ except ImportError:
     pass
 ### end
 
+
+def check_qtxml():
+    """Return True if PyQt5.QtXml can be imported.
+    
+    in some early releases of PyQt5, QtXml was missing because it was
+    thought QtXml was deprecated.
+    
+    """
+    import PyQt5
+    try:
+        import PyQt5.QtXml
+    except ImportError:
+        return False
+    return True
+
+
 def pkg_config(package, attrs=None, include_only=False):
     """parse the output of pkg-config for a package.
     
@@ -254,8 +270,9 @@ class build_ext(build_ext_base):
             cmd += ['-I', self._sip_sipfiles_dir()]
         if tag:
             cmd += ['-t', tag]
+        if not check_qtxml():
+            cmd += ["-x", "QTXML_AVAILABLE"]     # mark QtXml not supported
         cmd += [
-            "-x", "QTXML_AVAILABLE",             # QTXML is not supported
             "-c", self.build_temp,
             "-b", sbf,
             "-I", self.pyqt_sip_dir]             # find the PyQt5 stuff
