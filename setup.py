@@ -188,7 +188,7 @@ class build_ext(build_ext_base):
         except (OSError, subprocess.CalledProcessError) as e:
             raise SystemExit('Failed to determine Qt version (%s).' % e)
 
-        if not qt_version.startswith("4."):
+        if not qt_version.startswith("5."):
             raise SystemExit('Unsupported Qt version (%s). '
                              'Try specifying the path to qmake manually via '
                              '--qmake-bin=' % qt_version)
