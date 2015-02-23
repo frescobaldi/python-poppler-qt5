@@ -40,7 +40,9 @@ public:
         CaseSensitive,
         CaseInsensitive,
     };
-    bool search(const QString &text, QRectF &rect, SearchDirection direction, SearchMode caseSensitive, Rotation rotate = Rotate0) const /ReleaseGIL/;
+%If(POPPLER_V0_22_0 -)
+	QList<QRectF> search(const QString &text, SearchMode caseSensitive, Rotation rotate = Rotate0) const /ReleaseGIL/;
+%End
     bool search(const QString &text, double &rectLeft, double &rectTop, double &rectRight, double &rectBottom, SearchDirection direction, SearchMode caseSensitive, Rotation rotate = Rotate0) const /ReleaseGIL/;
     QList<Poppler::TextBox*> textList(Rotation rotate = Rotate0) const;
     QSizeF pageSizeF() const;
