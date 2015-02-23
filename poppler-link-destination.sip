@@ -1,6 +1,16 @@
 namespace Poppler {
 
-class LinkDestination {
+class LinkDestination
+{
+%Docstring
+A destination.
+
+The LinkDestination class represent a "destination" (in terms of visual
+viewport to be displayed) for ``Poppler.LinkGoto`` links,
+and items in the table of contents (TOC) of a document.
+
+Coordinates are in 0..1 range.
+%End
 %TypeHeaderCode
 #include <qt5/poppler-qt5.h>
 #include <qt5/poppler-link.h>
