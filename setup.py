@@ -256,7 +256,13 @@ class build_ext(build_ext_base):
         
         # Disable features if older poppler-qt5 version is found.
         # See the defined tags in %Timeline{} in poppler-qt5.sip.
-        if not ver or ver <= (0, 24, 0):
+        if not ver or ver <= (0, 20, 0):
+            tag = 'POPPLER_V0_20_0'
+        elif ver < (0, 22, 0):
+            tag = 'POPPLER_V0_20_0'
+        elif ver < (0, 24, 0):
+            tag = 'POPPLER_V0_22_0'
+        elif ver < (0, 24, 5):
             tag = 'POPPLER_V0_24_0'
         elif ver < (0, 28, 0):
             tag = 'POPPLER_V0_24_5'

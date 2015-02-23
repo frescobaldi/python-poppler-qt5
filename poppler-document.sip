@@ -37,12 +37,8 @@ public:
     enum RenderHint {
         Antialiasing = 0x00000001,
         TextAntialiasing = 0x00000002,
-%If(POPPLER_V0_12_1 -)
         TextHinting = 0x00000004,
-%End
-%If(POPPLER_V0_18_0 -)
         TextSlightHinting = 0x00000008,
-%End
 %If(POPPLER_V0_22_0 -)
         OverprintPreview = 0x00000010,
 %End
@@ -84,9 +80,7 @@ public:
     bool okToCreateFormFields() const;
     bool okToExtractForAccessibility() const;
     bool okToAssemble() const;
-%If(POPPLER_V0_16_0 -)
     bool getPdfId(QByteArray *permanentId, QByteArray *updateId) const;
-%End
     void getPdfVersion(int *major, int *minor) const;
     QList<Poppler::FontInfo> fonts() const /ReleaseGIL/;
 %If(POPPLER_V0_22_0 -)

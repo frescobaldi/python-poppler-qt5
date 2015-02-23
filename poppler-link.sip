@@ -1,3 +1,6 @@
+struct Ref;
+class MediaRendition;
+
 namespace Poppler {
 
 class Link {
@@ -17,6 +20,7 @@ public:
         Action,
         Sound,
         Movie,
+        Rendition,
         JavaScript,
     };
     virtual LinkType linkType() const;
@@ -43,10 +47,12 @@ private:
         case Poppler::Link::Sound:
             sipType = sipType_Poppler_LinkSound;
             break;
-// (Not yet implemented upstream)
-//         case Poppler::Link::Movie:
-//             sipType = sipType_Poppler_LinkMovie;
-//             break;
+        case Poppler::Link::Movie:
+            sipType = sipType_Poppler_LinkMovie;
+             break;
+        case Poppler::Link::Rendition:
+            sipType = sipType_Poppler_LinkRendition;
+            break;
         case Poppler::Link::JavaScript:
             sipType = sipType_Poppler_LinkJavaScript;
             break;
@@ -168,6 +174,77 @@ private:
     
 }; // class LinkSound
 
+%If(POPPLER_V0_22_0 -)
+class LinkRendition : Poppler::Link
+{
+%TypeHeaderCode
+#include <qt5/poppler-qt5.h>
+#include <qt5/poppler-link.h>
+%End
+
+	public:
+		/**
+		 * Describes the possible rendition actions.
+		 *
+		 * \since 0.22
+		 */
+		enum RenditionAction
+        {
+			NoRendition,
+			PlayRendition,
+			StopRendition,
+			PauseRendition,
+			ResumeRendition
+		};
+
+		/**
+		 * Create a new rendition link.
+		 *
+		 * \param linkArea the active area of the link
+		 * \param rendition the media rendition object. Ownership is taken
+		 * \param operation the numeric operation (action) (@see ::LinkRendition::RenditionOperation)
+		 * \param script the java script code
+		 * \param annotationReference the object reference of the screen annotation associated with this rendition action
+		 * \since 0.22
+		 */
+		LinkRendition( const QRectF &linkArea, MediaRendition *rendition, int operation, const QString &script, const Ref &annotationReference );
+
+		/**
+		 * Destructor.
+		 */
+		virtual ~LinkRendition();
+
+		LinkType linkType() const;
+
+		/**
+		 * Returns the media rendition object if the redition provides one, @c 0 otherwise
+		 */
+		MediaRendition *rendition() const;
+
+		/**
+		 * Returns the action that should be executed if a rendition object is provided.
+		 *
+		 * \since 0.22
+		 */
+		RenditionAction action() const;
+
+		/**
+		 * The JS code that shall be executed or an empty string.
+		 *
+		 * \since 0.22
+		 */
+		QString script() const;
+
+		/**
+		 * Returns whether the given @p annotation is the referenced screen annotation for this rendition @p link.
+		 *
+		 * \since 0.22
+		 */
+		bool isReferencedAnnotation( const Poppler::ScreenAnnotation *annotation ) const;
+
+}; // class LinkRendition
+%End
+
 
 class LinkJavaScript : Poppler::Link {
 %TypeHeaderCode
@@ -185,6 +262,54 @@ private:
     LinkJavaScript(const Poppler::LinkJavaScript&);
     
 }; // class LinkJavaScript
+
+class LinkMovie : Poppler::Link
+{
+%Docstring
+Movie: a movie to be played.
+%End
+%TypeHeaderCode
+#include <qt5/poppler-qt5.h>
+#include <qt5/poppler-link.h>
+%End
+	public:
+		/**
+		 * Describes the operation to be performed on the movie.
+		 */
+		enum Operation
+        {
+            Play,
+            Stop,
+		    Pause,
+		    Resume
+		};
+
+		/**
+		 * Create a new Movie link.
+		 *
+		 * \param linkArea the active area of the link
+		 * \param operation the operation to be performed on the movie
+		 * \param annotationTitle the title of the movie annotation identifying the movie to be played
+		 * \param annotationReference the object reference of the movie annotation identifying the movie to be played
+		 *
+		 * Note: This constructor is supposed to be used by Poppler::Page only.
+		 */
+		LinkMovie( const QRectF &linkArea, Operation operation, const QString &annotationTitle, const Ref &annotationReference );
+		/**
+		 * Destructor.
+		 */
+		~LinkMovie();
+		LinkType linkType() const;
+		/**
+		 * Returns the operation to be performed on the movie.
+		 */
+		Operation operation() const;
+		/**
+		 * Returns whether the given @p annotation is the referenced movie annotation for this movie @p link.
+		 */
+		bool isReferencedAnnotation( const Poppler::MovieAnnotation *annotation ) const;
+
+}; // class LinkMovie
 
 }; // namespace Poppler
 
