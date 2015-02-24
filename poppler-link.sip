@@ -1,7 +1,7 @@
-namespace Poppler {
-
 struct Ref;
 class MediaRendition;
+
+namespace Poppler {
 
 class Link {
 %TypeHeaderCode
@@ -207,7 +207,7 @@ class LinkRendition : Poppler::Link
 		 * \param annotationReference the object reference of the screen annotation associated with this rendition action
 		 * \since 0.22
 		 */
-		LinkRendition( const QRectF &linkArea, Poppler::MediaRendition *rendition, int operation, const QString &script, const Poppler::Ref &annotationReference );
+		LinkRendition( const QRectF &linkArea, MediaRendition *rendition, int operation, const QString &script, const Ref &annotationReference );
 
 		/**
 		 * Destructor.
@@ -219,7 +219,7 @@ class LinkRendition : Poppler::Link
 		/**
 		 * Returns the media rendition object if the redition provides one, @c 0 otherwise
 		 */
-		Poppler::MediaRendition *rendition() const;
+		//MediaRendition *rendition() const;
 
 		/**
 		 * Returns the action that should be executed if a rendition object is provided.
@@ -294,7 +294,7 @@ Movie: a movie to be played.
 		 *
 		 * Note: This constructor is supposed to be used by Poppler::Page only.
 		 */
-		LinkMovie( const QRectF &linkArea, Operation operation, const QString &annotationTitle, const Poppler::Ref &annotationReference );
+		LinkMovie( const QRectF &linkArea, Operation operation, const QString &annotationTitle, const Ref &annotationReference );
 		/**
 		 * Destructor.
 		 */
