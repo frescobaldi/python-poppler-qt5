@@ -39,6 +39,9 @@ There are a few other differences:
 called as ``d.getPdfVersion()``, (where ``d`` is a ``Poppler::Document``
 instance); it will return a tuple of two integers (major, minor).
 
+``Poppler::Document`` has ``__len__`` and ``__getitem__`` methods, corresponding
+to ``numPages()`` and ``page(int num)``.
+
 ``Poppler::FontIterator`` (returned by ``Poppler::Document::newFontIterator``)
 is also a Python iterable (e.g. has ``__iter__()`` and ``__next__()`` methods).
 So although you can use::

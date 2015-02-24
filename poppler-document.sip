@@ -70,6 +70,10 @@ public:
 %End
     Poppler::Page *page(const QString &label) const /Factory/;
     int numPages() const /__len__/;
+    int __bool__() const;
+%MethodCode
+    sipRes = 1;
+%End
     PageMode pageMode() const;
     PageLayout pageLayout() const;
     bool unlock(const QByteArray &ownerPassword, const QByteArray &userPassword);
