@@ -128,6 +128,7 @@ class build_ext(build_ext_base):
     user_options = build_ext_base.user_options + [
         ('poppler-version=', None, "version of the poppler library"),
         ('qmake-bin=', None, "Path to qmake binary"),
+        ('sip-bin=', None, "Path to sip binary"),
         ('qt-include-dir=', None, "Path to Qt headers"),
         ('pyqt-sip-dir=', None, "Path to PyQt's SIP files"),
         ('pyqt-sip-flags=', None, "SIP flags used to generate PyQt bindings")
@@ -136,9 +137,8 @@ class build_ext(build_ext_base):
     def initialize_options (self):
         build_ext_base.initialize_options(self)
         self.poppler_version = None
-
         self.qmake_bin = 'qmake'
-
+        self.sip_bin = None
         self.qt_include_dir = None
         self.pyqt_sip_dir = None
         self.pyqt_sip_flags = None
@@ -243,6 +243,10 @@ class build_ext(build_ext_base):
                 pvlen = 'i' * len(poppler_qt5_version),
                 pvargs = ', '.join(map(format, poppler_qt5_version))))
         
+    def _find_sip(self):
+        """override _find_sip to allow for manually speficied sip path."""
+        return self.sip_bin or build_ext_base._find_sip()
+    
     def _sip_compile(self, sip_bin, source, sbf):
         
         # First check manually specified poppler version
