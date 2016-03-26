@@ -288,7 +288,7 @@ class build_ext(build_ext_base):
 
 if platform.system() == 'Windows':
    # Enforce libraries to link against on Windows
-   ext_args['libraries'] = ['poppler-qt5', 'QtCore5', 'QtGui5', 'QtXml5']
+   ext_args['libraries'] = ['poppler-qt5', 'Qt5Core', 'Qt5Gui', 'Qt5Xml']
    
    class bdist_support():
        def __find_poppler_dll(self):
