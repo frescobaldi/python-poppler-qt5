@@ -309,7 +309,7 @@ if platform.system() == 'Windows':
                return False
                
            self.mkpath(self.bdist_dir)
-           self.copy_file(poppler_dll, os.path.join(self.bdist_dir, "python-poppler4.dll"))
+           self.copy_file(poppler_dll, os.path.join(self.bdist_dir, "python-poppler5.dll"))
            
            return True
    
