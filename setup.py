@@ -245,7 +245,7 @@ class build_ext(build_ext_base):
         
     def _find_sip(self):
         """override _find_sip to allow for manually speficied sip path."""
-        return self.sip_bin or build_ext_base._find_sip()
+        return self.sip_bin or build_ext_base._find_sip(self)
     
     def _sip_compile(self, sip_bin, source, sbf):
         
