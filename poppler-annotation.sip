@@ -527,7 +527,7 @@ class HighlightAnnotation : Poppler::Annotation
 %Docstring
 Text highlight annotation.
 
-The higlight annotation represents some areas of text being "highlighted".
+The highlight annotation represents some areas of text being "highlighted".
 %End
 %TypeHeaderCode
 #include <qt5/poppler-qt5.h>
