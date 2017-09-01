@@ -28,7 +28,7 @@ disabled. This concerns the ``Document::toc()`` method and some constructors
 and the ``store()`` methods in the ``Annotation`` subclasses. So, using
 PyQt5 >= 5.4 is recommended.
 
-Whereever the C++ API requires ``QList``, ``QSet`` or ``QLinkedList``, any
+Wherever the C++ API requires ``QList``, ``QSet`` or ``QLinkedList``, any
 Python sequence can be used. 
 API calls that return ``QList``, ``QSet`` or ``QLinkedList`` all return Python
 lists.
