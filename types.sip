@@ -27,7 +27,7 @@
     foreach (Poppler::Document::RenderBackend value, set)
     {
         PyObject *obj = PyLong_FromLong ((long) value);
-        if (obj == NULL || PyList_SET_ITEM (l, i, obj) < 0)
+        if (obj == NULL || PyList_SET_ITEM (l, i, obj) == NULL)
         {
             Py_DECREF(l);
 

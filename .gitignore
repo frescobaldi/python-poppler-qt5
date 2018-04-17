@@ -3,3 +3,4 @@ version.sip
 *~
 build/
 dist/
+python_poppler_qt5.egg-info/
