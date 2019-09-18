@@ -9,7 +9,6 @@ class MediaRendition {
 %End
 
   public:
-    MediaRendition(::MediaRendition *rendition);
     ~MediaRendition();
     bool isValid() const;
     QString contentType() const;
@@ -20,6 +19,10 @@ class MediaRendition {
     bool showControls() const;
     float repeatCount() const;
     QSize size() const;
+
+  private:
+    MediaRendition(Poppler::MediaRendition *rendition);
+    MediaRendition(const Poppler::MediaRendition&);
 
 }; // class MediaRendition
 
