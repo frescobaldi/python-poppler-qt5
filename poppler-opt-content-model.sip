@@ -22,6 +22,10 @@ public:
 
     virtual QVariant headerData( int section, Qt::Orientation orientation, int role = Qt::DisplayRole ) const;
 
+%If(POPPLER_V0_50_0 -)
+    void applyLink( LinkOCGState *link );
+%End
+
 private:
     OptContentModel(const Poppler::OptContentModel&);
 }; // class OptContentModel

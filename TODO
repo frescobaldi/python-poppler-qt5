@@ -1,7 +1,8 @@
 TODO:
-- make demo.py working with PyQt5
+
 
 DONE:
+- make demo.py working with PyQt5
 - Poppler::Document::newFontIterator() is usable as Python iterable
 - Poppler::HighlightAnnotation::Quad.points has been fixed
 - support Poppler::InkAnnotation::inkPaths() and setInkPaths()

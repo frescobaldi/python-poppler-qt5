@@ -273,12 +273,14 @@ Movie: a movie to be played.
 
 }; // class LinkMovie
 
-//%If(POPPLER_V0_50_0 -)
-//class LinkOCGState : Poppler::Link
-//{
-//		LinkType linkType() const;
-//}; // class LinkOCGState
-//%End
+%If(POPPLER_V0_50_0 -)
+class LinkOCGState : Poppler::Link
+{
+		LinkType linkType() const;
+    private:
+        LinkOCGState(const Poppler::LinkOCGState&);
+}; // class LinkOCGState
+%End
 
 }; // namespace Poppler
 

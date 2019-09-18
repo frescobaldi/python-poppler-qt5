@@ -2,7 +2,7 @@
 
 project = dict(
     name = 'python-poppler-qt5',
-    version = '0.74.0',
+    version = '0.75.0',
     description = 'A Python binding to Poppler-Qt5',
     long_description = (
         'A Python binding to Poppler-Qt5 that aims for '
@@ -12,10 +12,10 @@ project = dict(
     ),
     maintainer = 'Wilbert Berendsen',
     maintainer_email = 'wbsoft@xs4all.nl',
-    url = 'https://github.com/wbsoft/python-poppler-qt5',
+    url = 'https://github.com/frescobaldi/python-poppler-qt5',
     license = 'LGPL',
     classifiers = [
-        'Development Status :: 3 - Alpha',
+        'Development Status :: 5 - Production/Stable'
         'Intended Audience :: Developers',
         'License :: OSI Approved :: GNU Library or Lesser General Public License (LGPL)',
         'Operating System :: MacOS :: MacOS X',
