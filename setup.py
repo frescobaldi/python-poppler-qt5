@@ -277,10 +277,14 @@ class build_ext(build_ext_base):
             tag = 'POPPLER_V0_30_0'
         elif ver < (0, 36, 0):
             tag = 'POPPLER_V0_31_0'
-        elif ver < (0, 60, 0):
+        elif ver < (0, 50, 0):
             tag = 'POPPLER_V0_36_0'
-        elif ver < (0, 74, 0):
+        elif ver < (0, 60, 0):
+            tag = 'POPPLER_V0_50_0'
+        elif ver < (0, 63, 0):
             tag = 'POPPLER_V0_60_0'
+        elif ver < (0, 74, 0):
+            tag = 'POPPLER_V0_63_0'
         else:
             tag = 'POPPLER_V0_74_0'
         

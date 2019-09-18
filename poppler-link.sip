@@ -22,6 +22,9 @@ public:
         Movie,
         Rendition,
         JavaScript,
+%If(POPPLER_V0_50_0 -)
+        OCGState,
+%End
     };
     virtual LinkType linkType() const;
     virtual ~Link();
@@ -141,6 +144,7 @@ public:
         Find = 10,
         GoToPage = 11,
         Close = 12,
+        Print = 13,
     };
     ActionType actionType() const;
     LinkAction( const QRectF &linkArea, ActionType actionType );
@@ -310,6 +314,13 @@ Movie: a movie to be played.
 		bool isReferencedAnnotation( const Poppler::MovieAnnotation *annotation ) const;
 
 }; // class LinkMovie
+
+%If(POPPLER_V0_50_0 -)
+class LinkOCGState : Poppler::Link
+{
+		LinkType linkType() const;
+}; // class LinkOCGState
+%End
 
 }; // namespace Poppler
 

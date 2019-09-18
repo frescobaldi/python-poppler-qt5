@@ -42,7 +42,7 @@ public:
     };
 %If(POPPLER_V0_31_0 -)
     enum SearchFlag {
-%If(POPPLER_V0_60_0 -)
+%If(POPPLER_V0_63_0 -)
         NoSearchFlags = 0x00000000,
 %End
         IgnoreCase = 0x00000001,
