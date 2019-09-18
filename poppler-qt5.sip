@@ -1,4 +1,4 @@
-%Module(name=popplerqt5, version=0)
+%Module(name=popplerqt5)
 
 /*
  * Bindings for Poppler-Qt5 to Python
@@ -23,6 +23,8 @@
     POPPLER_V0_31_0
     POPPLER_V0_36_0
     POPPLER_V0_50_0
+    POPPLER_V0_51_0
+    POPPLER_V0_53_0
     POPPLER_V0_60_0
     POPPLER_V0_63_0
     POPPLER_V0_74_0
@@ -44,6 +46,7 @@
 %Include poppler-form.sip
 %Include poppler-link.sip
 %Include poppler-link-destination.sip
+%Include poppler-media.sip
 %Include poppler-movie-object.sip
 %Include poppler-opt-content-model.sip
 %Include poppler-page.sip

@@ -1,8 +1,8 @@
-Version 0.74.0 -- September 2019
+Version 0.74.0 -- September 18th 2019
 
 * Enable C++11 support in setup.py (Alex Ball)
 * Fix build error on MacOSX (Davide Liessi)
-* Added more methods in Poppler Qt5 api
+* Added more methods in Poppler Qt5 api (WB)
 
 Version 0.28.0 -- Feb 2019
 

@@ -59,7 +59,7 @@ public:
 %If(POPPLER_V0_22_0 -)
         AWidget = 13,
 %End
-%If(POPPLER_V0_74_0 -)
+%If(POPPLER_V0_36_0 -)
         ARichMedia = 14,
 %End
         A_BASE = 0
@@ -260,6 +260,7 @@ private:
     virtual void store( QDomNode & parentNode, QDomDocument & document ) const;
 %End
 
+%If(- POPPLER_V0_36_0)
 %ConvertToSubClassCode
     switch (sipCpp->subType()) {
         case Poppler::Annotation::AText:
@@ -304,9 +305,58 @@ private:
         default:
             sipType = sipType_Poppler_Annotation;
     }
-
 %End
-
+%End
+%If(POPPLER_V0_36_0 -)
+%ConvertToSubClassCode
+    switch (sipCpp->subType()) {
+        case Poppler::Annotation::AText:
+            sipType = sipType_Poppler_TextAnnotation;
+            break;
+        case Poppler::Annotation::ALine:
+            sipType = sipType_Poppler_LineAnnotation;
+            break;
+        case Poppler::Annotation::AGeom:
+            sipType = sipType_Poppler_GeomAnnotation;
+            break;
+        case Poppler::Annotation::AHighlight:
+            sipType = sipType_Poppler_HighlightAnnotation;
+            break;
+        case Poppler::Annotation::AStamp:
+            sipType = sipType_Poppler_StampAnnotation;
+            break;
+        case Poppler::Annotation::AInk:
+            sipType = sipType_Poppler_InkAnnotation;
+            break;
+        case Poppler::Annotation::ALink:
+            sipType = sipType_Poppler_LinkAnnotation;
+            break;
+        case Poppler::Annotation::ACaret:
+            sipType = sipType_Poppler_CaretAnnotation;
+            break;
+        case Poppler::Annotation::AFileAttachment:
+            sipType = sipType_Poppler_FileAttachmentAnnotation;
+            break;
+        case Poppler::Annotation::ASound:
+            sipType = sipType_Poppler_SoundAnnotation;
+            break;
+        case Poppler::Annotation::AMovie:
+            sipType = sipType_Poppler_MovieAnnotation;
+            break;
+        case Poppler::Annotation::AScreen:
+            sipType = sipType_Poppler_ScreenAnnotation;
+            break;
+        case Poppler::Annotation::AWidget:
+            sipType = sipType_Poppler_WidgetAnnotation;
+            break;
+        case Poppler::Annotation::ARichMedia:
+            sipType = sipType_Poppler_RichMediaAnnotation;
+            break;
+        default:
+            sipType = sipType_Poppler_Annotation;
+    }
+%End
+%End
 
 }; // class Annotation
 
@@ -1041,6 +1091,123 @@ use the FormField classes to get all the form-related information.
 %End
 
 }; // class WidgetAnnotation
+
+%If(POPPLER_V0_36_0 -)
+class RichMediaAnnotation : Poppler::Annotation
+{
+%TypeHeaderCode
+#include <qt5/poppler-qt5.h>
+#include <qt5/poppler-annotation.h>
+%End
+  public:
+    ~RichMediaAnnotation();
+
+    SubType subType() const;
+    class Params
+    {
+      public:
+        Params();
+        ~Params();
+
+        /**
+         * Returns the parameters for the flash player.
+         */
+        QString flashVars() const;
+
+    };
+    class Instance
+    {
+      public:
+        enum Type
+        {
+          Type3D,     ///< A 3D media file.
+          TypeFlash,  ///< A Flash media file.
+          TypeSound,  ///< A sound media file.
+          TypeVideo   ///< A video media file.
+        };
+
+        Instance();
+        ~Instance();
+        Type type() const;
+        Poppler::RichMediaAnnotation::Params* params() const;
+    };
+    class Configuration
+    {
+      public:
+        enum Type
+        {
+          Type3D,     ///< A 3D media file.
+          TypeFlash,  ///< A Flash media file.
+          TypeSound,  ///< A sound media file.
+          TypeVideo   ///< A video media file.
+        };
+
+        Configuration();
+        ~Configuration();
+        Type type() const;
+        QString name() const;
+        QList< Poppler::RichMediaAnnotation::Instance* > instances() const;
+    };
+
+    class Asset
+    {
+      public:
+        Asset();
+        ~Asset();
+        QString name() const;
+        EmbeddedFile* embeddedFile() const;
+    };
+    class Content
+    {
+      public:
+        Content();
+        ~Content();
+        QList< Poppler::RichMediaAnnotation::Configuration* > configurations() const;
+        QList< Poppler::RichMediaAnnotation::Asset* > assets() const;
+    };
+    class Activation
+    {
+      public:
+        enum Condition {
+          PageOpened,   ///< Activate when page is opened.
+          PageVisible,  ///< Activate when page becomes visible.
+          UserAction    ///< Activate when user interacts with the annotation.
+        };
+        Activation();
+        ~Activation();
+        Condition condition() const;
+    };
+    class Deactivation
+    {
+      public:
+        enum Condition {
+          PageClosed,     ///< Deactivate when page is closed.
+          PageInvisible,  ///< Deactivate when page becomes invisible.
+          UserAction      ///< Deactivate when user interacts with the annotation.
+        };
+
+        Deactivation();
+        ~Deactivation();
+        Condition condition() const;
+    };
+    class Settings
+    {
+      public:
+        Poppler::RichMediaAnnotation::Activation* activation() const;
+        Poppler::RichMediaAnnotation::Deactivation* deactivation() const;
+      private:
+        Settings();
+        ~Settings();
+    };
+    Poppler::RichMediaAnnotation::Settings* settings() const;
+    Poppler::RichMediaAnnotation::Content* content() const;
+  
+  private:
+    RichMediaAnnotation();
+
+}; // class RichMediaAnnotation
+%End
+
 
 
 }; // namespace Poppler

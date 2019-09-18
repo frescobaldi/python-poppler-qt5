@@ -223,7 +223,7 @@ class LinkRendition : Poppler::Link
 		/**
 		 * Returns the media rendition object if the redition provides one, @c 0 otherwise
 		 */
-		//MediaRendition *rendition() const;
+		MediaRendition *rendition() const;
 
 		/**
 		 * Returns the action that should be executed if a rendition object is provided.
@@ -315,12 +315,12 @@ Movie: a movie to be played.
 
 }; // class LinkMovie
 
-%If(POPPLER_V0_50_0 -)
-class LinkOCGState : Poppler::Link
-{
-		LinkType linkType() const;
-}; // class LinkOCGState
-%End
+//%If(POPPLER_V0_50_0 -)
+//class LinkOCGState : Poppler::Link
+//{
+//		LinkType linkType() const;
+//}; // class LinkOCGState
+//%End
 
 }; // namespace Poppler
 
