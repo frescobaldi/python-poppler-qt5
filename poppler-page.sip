@@ -40,10 +40,27 @@ public:
         CaseSensitive,
         CaseInsensitive,
     };
-%If(POPPLER_V0_22_0 -)
-	QList<QRectF> search(const QString &text, SearchMode caseSensitive, Rotation rotate = Rotate0) const /ReleaseGIL/;
+%If(POPPLER_V0_31_0 -)
+    enum SearchFlag {
+%If(POPPLER_V0_60_0 -)
+        NoSearchFlags = 0x00000000,
 %End
-    bool search(const QString &text, double &rectLeft, double &rectTop, double &rectRight, double &rectBottom, SearchDirection direction, SearchMode caseSensitive, Rotation rotate = Rotate0) const /ReleaseGIL/;
+        IgnoreCase = 0x00000001,
+        WholeWords = 0x00000002,
+%If(POPPLER_V0_74_0 -)
+        IgnoreDiacritics = 0x00000004,
+%End
+    };
+    typedef QFlags<Poppler::Page::SearchFlag> SearchFlags;
+%End
+    bool search(const QString &text, double &rectLeft, double &rectTop, double &rectRight, double &rectBottom, SearchDirection direction, SearchMode caseSensitive, Rotation rotate = Rotate0) const /Deprecated, ReleaseGIL/;
+    bool search(const QString &text, double &rectLeft, double &rectTop, double &rectRight, double &rectBottom, SearchDirection direction, SearchFlags flags = 0, Rotation rotate = Rotate0) const /ReleaseGIL/;
+%If(POPPLER_V0_22_0 -)
+    QList<QRectF> search(const QString &text, SearchMode caseSensitive, Rotation rotate = Rotate0) const /Deprecated, ReleaseGIL/;
+%End
+%If(POPPLER_V0_31_0 -)
+    QList<QRectF> search(const QString &text, SearchFlags flags = 0, Rotation rotate = Rotate0) const /ReleaseGIL/;
+%End
     QList<Poppler::TextBox*> textList(Rotation rotate = Rotate0) const;
     QSizeF pageSizeF() const;
     QSize pageSize() const;
@@ -58,12 +75,17 @@ public:
     Orientation orientation() const;
     void defaultCTM(double *CTM, double dpiX, double dpiY, int rotate, bool upsideDown);
     QList<Poppler::Link*> links() const;
-    QList<Poppler::Annotation*> annotations() const;
+    QList<Poppler::Annotation*> annotations() const /Factory/;
+%If(POPPLER_V0_28_0 -)
+    QList<Poppler::Annotation*> annotations(const QSet<Poppler::Annotation::SubType> &subtypes) const /Factory/;
+%End
+%If(POPPLER_V0_20_0 -)
+    void addAnnotation( const Annotation *ann );
+    void removeAnnotation( const Annotation *ann );
+%End
     QList<Poppler::FormField*> formFields() const;
     double duration() const;
     QString label() const;
-    
-    void addAnnotation(const Poppler::Annotation *ann);
 
 private:
     Page();
