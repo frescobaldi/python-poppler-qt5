@@ -2,7 +2,7 @@
 
 project = dict(
     name = 'python-poppler-qt5',
-    version = '0.24.2',
+    version = '0.74.0',
     description = 'A Python binding to Poppler-Qt5',
     long_description = (
         'A Python binding to Poppler-Qt5 that aims for '
@@ -271,8 +271,16 @@ class build_ext(build_ext_base):
             tag = 'POPPLER_V0_24_0'
         elif ver < (0, 28, 0):
             tag = 'POPPLER_V0_24_5'
-        else:
+        elif ver < (0, 30, 0):
             tag = 'POPPLER_V0_28_0'
+        elif ver < (0, 36, 0):
+            tag = 'POPPLER_V0_30_0'
+        elif ver < (0, 60, 0):
+            tag = 'POPPLER_V0_36_0'
+        elif ver < (0, 74, 0):
+            tag = 'POPPLER_V0_60_0'
+        else:
+            tag = 'POPPLER_V0_74_0'
         
         cmd = [sip_bin]
         if hasattr(self, 'sip_opts'):

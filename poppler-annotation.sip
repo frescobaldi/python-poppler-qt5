@@ -59,6 +59,9 @@ public:
 %If(POPPLER_V0_22_0 -)
         AWidget = 13,
 %End
+%If(POPPLER_V0_74_0 -)
+        ARichMedia = 14,
+%End
         A_BASE = 0
     };
     enum Flag

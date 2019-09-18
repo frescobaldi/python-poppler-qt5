@@ -1,4 +1,10 @@
-Version 0.28.0 -- 
+Version 0.74.0 -- September 2019
+
+* Enable C++11 support in setup.py (Alex Ball)
+* Fix build error on MacOSX (Davide Liessi)
+* Added more methods in Poppler Qt5 api
+
+Version 0.28.0 -- Feb 2019
 
 * Initial release, converted from the python-poppler-qt4 code.
 * Disabled the methods that use QDomNode, QDomDocument and QDomElement types,

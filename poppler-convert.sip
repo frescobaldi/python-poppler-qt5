@@ -33,6 +33,10 @@ public:
         Printing = 0x00000001,
         StrictMargins = 0x00000002,
         ForceRasterization = 0x00000004,
+%If(POPPLER_V0_20_0 -)
+        PrintToEPS = 0x00000008,
+        HideAnnotations = 0x00000010,
+%End
     };
     typedef QFlags<Poppler::PSConverter::PSOption> PSOptions;
     ~PSConverter();

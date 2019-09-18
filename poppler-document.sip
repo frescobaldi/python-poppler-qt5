@@ -46,6 +46,12 @@ public:
         ThinLineSolid = 0x00000020,
         ThinLineShape = 0x00000040,
 %End
+%If(POPPLER_V0_36_0 -)
+        IgnorePaperColor = 0x00000080,
+%End
+%If(POPPLER_V0_60_0 -)
+        HideAnnotations = 0x00000100,
+%End
     };
     typedef QFlags<Poppler::Document::RenderHint> RenderHints;
     
@@ -76,11 +82,33 @@ public:
 %End
     PageMode pageMode() const;
     PageLayout pageLayout() const;
+%If(POPPLER_V0_28_0 -)
+    Qt::LayoutDirection textDirection() const;
+%End
     bool unlock(const QByteArray &ownerPassword, const QByteArray &userPassword);
     bool isLocked() const;
     QDateTime date( const QString & data ) const;
+    bool setDate( const QString & key, const QDateTime & val );
+    QDateTime creationDate() const;
+    bool setCreationDate( const QDateTime & val );
+    QDateTime modificationDate() const;
+    bool setModificationDate( const QDateTime & val );
     QString info( const QString & data ) const;
+    bool setInfo( const QString & key, const QString & val );
+    QString title() const;
+    bool setTitle( const QString & val );
+    QString author() const;
+    bool setAuthor( const QString & val );
+    QString subject() const;
+    bool setSubject( const QString & val );
+    QString keywords() const;
+    bool setKeywords( const QString & val );
+    QString creator() const;
+    bool setCreator( const QString & val );
+    QString producer() const;
+    bool setProducer( const QString & val );
     QStringList infoKeys() const;
+    bool removeInfo();
     bool isEncrypted() const;
     bool isLinearized() const;
     bool okToPrint() const;
@@ -92,12 +120,8 @@ public:
     bool okToCreateFormFields() const;
     bool okToExtractForAccessibility() const;
     bool okToAssemble() const;
-    bool getPdfId(QByteArray *permanentId, QByteArray *updateId) const;
     void getPdfVersion(int *major, int *minor) const;
     QList<Poppler::FontInfo> fonts() const /ReleaseGIL/;
-%If(POPPLER_V0_22_0 -)
-    FormType formType() const;
-%End
     Poppler::FontIterator* newFontIterator( int startPage = 0 ) const /Factory/;
     QByteArray fontData(const Poppler::FontInfo &font) const;
     QList<Poppler::EmbeddedFile*> embeddedFiles() const;
@@ -119,6 +143,13 @@ public:
     bool hasOptionalContent() const;
     Poppler::OptContentModel *optionalContentModel() /Factory/;
     QStringList scripts() const;
+    bool getPdfId(QByteArray *permanentId, QByteArray *updateId) const;
+%If(POPPLER_V0_22_0 -)
+    FormType formType() const;
+%End
+%If(POPPLER_V0_60_0 -)
+    QVector<int> formCalculateOrder() const;
+%End
 
 private:
     Document();
