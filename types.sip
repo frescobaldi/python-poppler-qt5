@@ -261,8 +261,7 @@ template <TYPE>
 %ConvertToTypeCode
     if (sipIsErr == NULL)
     {
-        // Both Int & Long can be converted to time_t
-        return (PyInt_Check(sipPy) || PyLong_Check(sipPy));
+        return PyLong_Check(sipPy);
     }
 
     if (sipPy == Py_None)
@@ -271,7 +270,7 @@ template <TYPE>
         return 1;
     }
 
-    if (PyInt_Check(sipPy) || PyLong_Check(sipPy))
+    if (PyLong_Check(sipPy))
     {
         *sipCppPtr = new long(PyLong_AsLong(sipPy)); 
         return 1;
