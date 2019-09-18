@@ -179,7 +179,7 @@ class SignatureValidationInfo {
 	    CertificateNotVerified      ///< The certificate is not yet verified.
 	};
 
-%If(POPPLER_V0_60_0 -)
+%If(POPPLER_V0_58_0 -)
 	enum HashAlgorithm
 	{
 	    HashAlgorithmUnknown,
@@ -195,7 +195,7 @@ class SignatureValidationInfo {
 	SignatureStatus signatureStatus() const;
 	CertificateStatus certificateStatus() const;
 	QString signerName() const;
-%If(POPPLER_V0_60_0 -)
+%If(POPPLER_V0_58_0 -)
 	QString signerSubjectDN() const;
 	HashAlgorithm hashAlgorithm() const;
     time_t signingTime() const;
@@ -217,7 +217,7 @@ class FormFieldSignature : Poppler::FormField {
 %End
     public:
 
-%If(POPPLER_V0_60_0 -)
+%If(POPPLER_V0_58_0 -)
 	enum SignatureType {
 	    AdbePkcs7sha1,
 	    AdbePkcs7detached,
@@ -235,12 +235,12 @@ class FormFieldSignature : Poppler::FormField {
     FormFieldSignature(const Poppler::FormFieldSignature&);
     
 	FormType type() const;
-%If(POPPLER_V0_60_0 -)
+%If(POPPLER_V0_58_0 -)
 	SignatureType signatureType() const;
 %End
 
 	SignatureValidationInfo validate(ValidateOptions opt) const;
-%If(POPPLER_V0_60_0 -)
+%If(POPPLER_V0_58_0 -)
 	SignatureValidationInfo validate(int opt, const QDateTime& validationTime) const;
 %End
 };  // FormFieldSignature

@@ -13,22 +13,7 @@
 %Import QtXml/QtXmlmod.sip
 %End
 
-%Timeline {
-    POPPLER_V0_20_0
-    POPPLER_V0_22_0
-    POPPLER_V0_24_0
-    POPPLER_V0_24_5
-    POPPLER_V0_28_0
-    POPPLER_V0_30_0
-    POPPLER_V0_31_0
-    POPPLER_V0_36_0
-    POPPLER_V0_50_0
-    POPPLER_V0_51_0
-    POPPLER_V0_53_0
-    POPPLER_V0_60_0
-    POPPLER_V0_63_0
-    POPPLER_V0_74_0
-}
+%Include timeline.sip
 
 %ModuleHeaderCode
 #include <qt5/poppler-qt5.h>

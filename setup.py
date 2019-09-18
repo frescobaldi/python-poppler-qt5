@@ -260,37 +260,14 @@ class build_ext(build_ext_base):
         self.write_version_sip(ver, version)
         
         # Disable features if older poppler-qt5 version is found.
-        # See the defined tags in %Timeline{} in poppler-qt5.sip.
-        if not ver or ver <= (0, 20, 0):
-            tag = 'POPPLER_V0_20_0'
-        elif ver < (0, 22, 0):
-            tag = 'POPPLER_V0_20_0'
-        elif ver < (0, 24, 0):
-            tag = 'POPPLER_V0_22_0'
-        elif ver < (0, 24, 5):
-            tag = 'POPPLER_V0_24_0'
-        elif ver < (0, 28, 0):
-            tag = 'POPPLER_V0_24_5'
-        elif ver < (0, 30, 0):
-            tag = 'POPPLER_V0_28_0'
-        elif ver < (0, 31, 0):
-            tag = 'POPPLER_V0_30_0'
-        elif ver < (0, 36, 0):
-            tag = 'POPPLER_V0_31_0'
-        elif ver < (0, 50, 0):
-            tag = 'POPPLER_V0_36_0'
-        elif ver < (0, 51, 0):
-            tag = 'POPPLER_V0_50_0'
-        elif ver < (0, 53, 0):
-            tag = 'POPPLER_V0_51_0'
-        elif ver < (0, 60, 0):
-            tag = 'POPPLER_V0_53_0'
-        elif ver < (0, 63, 0):
-            tag = 'POPPLER_V0_60_0'
-        elif ver < (0, 74, 0):
-            tag = 'POPPLER_V0_63_0'
-        else:
-            tag = 'POPPLER_V0_74_0'
+        # See the defined tags in %Timeline{} in timeline.sip.
+        tag = 'POPPLER_V0_20_0'
+        if ver:
+            with open("timeline.sip", "r") as f:
+                for m in re.finditer(r'POPPLER_V(\d+)_(\d+)_(\d+)', f.read()):
+                    if ver < tuple(map(int, m.group(1, 2, 3))):
+                        break
+                    tag = m.group()
         
         cmd = [sip_bin]
         if hasattr(self, 'sip_opts'):
