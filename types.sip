@@ -40,7 +40,7 @@
         Py_DECREF(obj);
         i++;
     }
-   
+
     return l;
 %End
 
@@ -54,15 +54,15 @@
     }
 
     QSet<Poppler::Document::RenderBackend> *qs = new QSet<Poppler::Document::RenderBackend>;
- 
+
     for (int i = 0; i < PySequence_Size(sipPy); ++i)
     {
         Poppler::Document::RenderBackend t = (Poppler::Document::RenderBackend)PyLong_AsLong(PySequence_ITEM (sipPy, i));
         *qs << t;
     }
- 
+
     *sipCppPtr = qs;
- 
+
     return sipGetState(sipTransferObj);
 %End
 };
@@ -135,7 +135,7 @@ template<TYPE>
 
     QLinkedList<TYPE> *qll = new QLinkedList<TYPE>;
     len = PySequence_Size(sipPy);
- 
+
     for (SIP_SSIZE_T i = 0; i < len; ++i)
     {
         PyObject *itm = PySequence_ITEM(sipPy, i);
@@ -143,7 +143,7 @@ template<TYPE>
         TYPE *t = reinterpret_cast<TYPE *>(sipConvertToType(itm, sipType_TYPE, sipTransferObj, SIP_NOT_NONE, &state, sipIsErr));
 
         Py_DECREF(itm);
- 
+
         if (*sipIsErr)
         {
             sipReleaseType(t, sipType_TYPE, state);
@@ -156,9 +156,9 @@ template<TYPE>
 
         sipReleaseType(t, sipType_TYPE, state);
     }
- 
+
     *sipCppPtr = qll;
- 
+
     return sipGetState(sipTransferObj);
 %End
 };
@@ -254,7 +254,7 @@ template <TYPE>
 
 %ConvertFromTypeCode
     PyObject* pTime;
-    pTime = PyLong_FromLong(*sipCpp);  
+    pTime = PyLong_FromLong(*sipCpp);
     return pTime;
 %End
 
@@ -266,13 +266,13 @@ template <TYPE>
 
     if (sipPy == Py_None)
     {
-        *sipCppPtr = new long();
+        *sipCppPtr = new time_t();
         return 1;
     }
 
     if (PyLong_Check(sipPy))
     {
-        *sipCppPtr = new long(PyLong_AsLong(sipPy)); 
+        *sipCppPtr = new time_t(PyLong_AsLong(sipPy));
         return 1;
     }
     return 0;
@@ -282,7 +282,7 @@ template <TYPE>
 /**
  * Convert to and from QList<qint64>
  */
- 
+
 %MappedType QList<qint64>
 {
 %TypeHeaderCode
