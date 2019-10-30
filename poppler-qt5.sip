@@ -44,14 +44,12 @@ namespace Poppler {
 
 // Functions in Poppler
 bool isCmsAvailable();
-QDateTime convertDate (char *dateString);
 
 %If(POPPLER_V0_22_0 -)
 bool isOverprintPreviewAvailable();
 %End
 
 %If(POPPLER_V0_64_0 -)
-QDateTime convertDate (char *dateString);
 QDateTime convertDate (const char *dateString);
 %End
 
