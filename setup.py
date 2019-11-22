@@ -15,7 +15,7 @@ project = dict(
     url = 'https://github.com/frescobaldi/python-poppler-qt5',
     license = 'LGPL',
     classifiers = [
-        'Development Status :: 5 - Production/Stable'
+        'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: GNU Library or Lesser General Public License (LGPL)',
         'Operating System :: MacOS :: MacOS X',
