@@ -20,7 +20,7 @@ Documentation
 -------------
 
 The Python API closely follows the Poppler Qt5 C++ interface library API,
-documented at http://people.freedesktop.org/~aacid/docs/qt5/ .
+documented at https://poppler.freedesktop.org/api/qt5/ .
 
 Note: Releases of PyQt5 < 5.4 currently do not support the QtXml module,
 all methods that use the QDomDocument, QDomElement and QDomNode types are
