@@ -25,8 +25,16 @@ public:
     QString fullyQualifiedName() const;
 %End
     QString uiName() const;
+%If(POPPLER_V0_79_0 -)
+    bool isPrintable () const;
+    void setPrintable (bool value);
+%End
     bool isReadOnly() const;
     bool isVisible() const;
+%If(POPPLER_V0_64_0 -)
+    void setReadOnly (bool value);
+    void setVisible (bool value);
+%End
     Poppler::Link* activationAction() const;
 %If(POPPLER_V0_53_0 -)
 	enum AdditionalActionType
@@ -41,7 +49,7 @@ public:
 
 private:
     FormField(const Poppler::FormField&);
-    
+
 %ConvertToSubClassCode
     switch (sipCpp->type()) {
         case Poppler::FormField::FormButton:
@@ -78,13 +86,17 @@ public:
     virtual FormType type() const;
     ButtonType buttonType() const;
     QString caption() const;
+%If(POPPLER_V0_79_0 -)
+    FormFieldIcon icon () const;
+    void setIcon (const FormFieldIcon &icon);
+%End
     bool state() const;
     void setState( bool state );
     QList<int> siblings() const;
 
 private:
     FormFieldButton(const Poppler::FormFieldButton&);
-    
+
 }; // class FormFieldButton
 
 
@@ -116,7 +128,7 @@ public:
 
 private:
     FormFieldText(const Poppler::FormFieldText&);
-    
+
 }; // class FormFieldText
 
 
@@ -136,6 +148,9 @@ public:
     virtual FormType type() const;
     ChoiceType choiceType() const;
     QStringList choices() const;
+%If(POPPLER_V0_87_0 -)
+    QVector< QPair< QString, QString > > choicesWithExportValues () const;
+%End
     bool isEditable() const;
     bool multiSelect() const;
     QList<int> currentChoices() const;
@@ -149,7 +164,7 @@ public:
 
 private:
     FormFieldChoice(const Poppler::FormFieldChoice&);
-    
+
 }; // class FormFieldChoice
 
 %If(POPPLER_V0_51_0 -)
@@ -192,6 +207,9 @@ class SignatureValidationInfo {
 	    HashAlgorithmSha224
 	};
 %End
+%If(POPPLER_V0_74_0 -)
+    CertificateInfo certificateInfo () const;
+%End
 	SignatureStatus signatureStatus() const;
 	CertificateStatus certificateStatus() const;
 	QString signerName() const;
@@ -233,7 +251,7 @@ class FormFieldSignature : Poppler::FormField {
 	//FormFieldSignature(DocumentData *doc, ::Page *p, ::FormWidgetSignature *w);
 	//~FormFieldSignature();
     FormFieldSignature(const Poppler::FormFieldSignature&);
-    
+
 	FormType type() const;
 %If(POPPLER_V0_58_0 -)
 	SignatureType signatureType() const;
@@ -246,6 +264,86 @@ class FormFieldSignature : Poppler::FormField {
 };  // FormFieldSignature
 
 %End // POPPLER_V0_51_0
+
+
+%If(POPPLER_V0_74_0 -)
+class CertificateInfo {
+%TypeHeaderCode
+#include <qt5/poppler-qt5.h>
+#include <qt5/poppler-form.h>
+%End
+    public:
+
+    enum EntityInfoKey {
+        CommonName,
+        DistinguishedName,
+        EmailAddress,
+        Organization
+    };
+
+    enum KeyUsageExtension {
+        KuDigitalSignature = 0x80,
+        KuNonRepudiation = 0x40,
+        KuKeyEncipherment = 0x20,
+        KuDataEncipherment = 0x10,
+        KuKeyAgreement = 0x08,
+        KuKeyCertSign = 0x04,
+        KuClrSign = 0x02,
+        KuEncipherOnly = 0x01,
+        KuNone = 0x00
+    };
+    // next line is how to convert Q_DECLARE_FLAGS for enums to sip :-)
+    typedef QFlags<Poppler::CertificateInfo::KeyUsageExtension> KeyUsageExtensions;
+
+    enum PublicKeyType {
+        RsaKey,
+        DsaKey,
+        EcKey,
+        OtherKey
+    };
+    QByteArray certificateData () const;
+%If(POPPLER_V21_01_0 -)
+    bool checkPassword (const QString &password) const;
+%End
+    bool isNull () const;
+    bool isSelfSigned () const;
+    QString issuerInfo (EntityInfoKey key) const;
+    KeyUsageExtensions keyUsageExtensions () const;
+%If(POPPLER_V21_01_0 -)
+    QString nickName () const;
+%End
+    //CertificateInfo & operator= (const CertificateInfo &other);  // XXX Syntax error
+    QByteArray publicKey () const;
+    int publicKeyStrength () const;
+    PublicKeyType publicKeyType () const;
+    QByteArray serialNumber () const;
+    QString subjectInfo (EntityInfoKey key) const;
+    QDateTime validityEnd () const;
+    QDateTime validityStart () const;
+    int version () const;
+
+    // copy constructor
+    CertificateInfo (const CertificateInfo &other);
+
+
+}; // class CertificateInfo
+%End // POPPLER_V0_74_0 -
+
+
+%If(POPPLER_V0_79_0 -)
+class FormFieldIcon {
+%TypeHeaderCode
+#include <qt5/poppler-qt5.h>
+#include <qt5/poppler-form.h>
+%End
+    public:
+    FormFieldIcon (const FormFieldIcon &ffIcon);
+    //FormFieldIcon (FormFieldIconData *data);
+    //FormFieldIcon & operator= (const FormFieldIcon &ffIcon);  // XXX Syntax error
+
+}; // FormFieldIcon
+%End // POPPLER_V0_79_0 -
+
 
 
 

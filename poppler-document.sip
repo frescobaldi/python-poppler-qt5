@@ -54,7 +54,7 @@ public:
 %End
     };
     typedef QFlags<Poppler::Document::RenderHint> RenderHints;
-    
+
     void setColorDisplayProfile(void *outputProfileA);
     void setColorDisplayProfileName(const QString &name);
     void* colorRgbProfile() const;
@@ -62,6 +62,11 @@ public:
     static Poppler::Document *load(const QString & filePath,
                             const QByteArray &ownerPassword=QByteArray(),
                             const QByteArray &userPassword=QByteArray()) /Factory, ReleaseGIL/;
+%If(POPPLER_V0_85_0 -)
+    static Poppler::Document *load (QIODevice *device,
+                            const QByteArray &ownerPassword=QByteArray(),
+                            const QByteArray &userPassword=QByteArray()) /Factory, ReleaseGIL/;
+%End
     static Poppler::Document *loadFromData(const QByteArray &fileContents,
                             const QByteArray &ownerPassword=QByteArray(),
                             const QByteArray &userPassword=QByteArray()) /Factory, ReleaseGIL/;
@@ -154,7 +159,7 @@ public:
 private:
     Document();
     Document(const Poppler::Document &);
-        
+
 }; // class Document
 
 }; // namespace Poppler
