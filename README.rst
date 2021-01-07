@@ -5,7 +5,9 @@ python-poppler-qt5
 A Python binding for libpoppler-qt5 that aims for completeness and for being
 actively maintained.
 
-Created and currently maintained by Wilbert Berendsen <wbsoft@xs4all.nl>.
+Created and maintained by Wilbert Berendsen <wbsoft@xs4all.nl>, with help of
+other contributors, especially where it concerns supporting many platforms and
+build systems. Thanks for everyone's help!
 
 Homepage: https://pypi.python.org/pypi/python-poppler-qt5/
 
@@ -29,9 +31,8 @@ and the ``store()`` methods in the ``Annotation`` subclasses. So, using
 PyQt5 >= 5.4 is recommended.
 
 Wherever the C++ API requires ``QList``, ``QSet`` or ``QLinkedList``, any
-Python sequence can be used. 
-API calls that return ``QList``, ``QSet`` or ``QLinkedList`` all return Python
-lists.
+Python sequence can be used. API calls that return ``QList``, ``QSet`` or
+``QLinkedList`` all return Python lists.
 
 There are a few other differences:
 
@@ -39,8 +40,8 @@ There are a few other differences:
 called as ``d.getPdfVersion()``, (where ``d`` is a ``Poppler::Document``
 instance); it will return a tuple of two integers (major, minor).
 
-``Poppler::Document`` has ``__len__`` and ``__getitem__`` methods, corresponding
-to ``numPages()`` and ``page(int num)``.
+``Poppler::Document`` has ``__len__`` and ``__getitem__`` methods,
+corresponding to ``numPages()`` and ``page(int num)``.
 
 ``Poppler::FontIterator`` (returned by ``Poppler::Document::newFontIterator``)
 is also a Python iterable (e.g. has ``__iter__()`` and ``__next__()`` methods).
@@ -59,15 +60,15 @@ you can also use the more Pythonic::
 In addition to the Poppler namespace, there are two toplevel module
 functions:
 
-    ``popplerqt5.version()``
-        returns the version of the ``python-poppler-qt5`` package as a
-        tuple of ints, e.g. ``(0, 18, 2)``.
-    
-    ``popplerqt5.poppler_version()``
-        returns the version of the linked Poppler-Qt5 library as a
-        tuple of ints, e.g. ``(0, 24, 5)``.
-        
-        This is determined at build time. If at build time the Poppler-Qt5
-        version could not be determined and was not specified, an empty
-        tuple might be returned.
+``popplerqt5.version()``
+    returns the version of the ``python-poppler-qt5`` package as a tuple of
+    ints, e.g. ``(0, 18, 2)``.
+
+``popplerqt5.poppler_version()``
+    returns the version of the linked Poppler-Qt5 library as a tuple of ints,
+    e.g. ``(0, 24, 5)``.
+
+    This is determined at build time. If at build time the Poppler-Qt5 version
+    could not be determined and was not specified, an empty tuple might be
+    returned.
 
