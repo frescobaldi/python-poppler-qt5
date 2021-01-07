@@ -2,7 +2,7 @@
 
 project = dict(
     name = 'python-poppler-qt5',
-    version = '0.75.0',
+    version = '21.1.0',
     description = 'A Python binding to Poppler-Qt5',
     long_description = (
         'A Python binding to Poppler-Qt5 that aims for '
@@ -38,7 +38,7 @@ try:
    from setuptools import setup, Extension
 except ImportError:
    from distutils.core import setup, Extension
-   
+
 import sipdistutils
 
 ### this circumvents a bug in sip < 4.14.2, where the file() builtin is used
@@ -56,10 +56,10 @@ except ImportError:
 
 def check_qtxml():
     """Return True if PyQt5.QtXml can be imported.
-    
+
     in some early releases of PyQt5, QtXml was missing because it was
     thought QtXml was deprecated.
-    
+
     """
     import PyQt5
     try:
@@ -71,11 +71,11 @@ def check_qtxml():
 
 def pkg_config(package, attrs=None, include_only=False):
     """parse the output of pkg-config for a package.
-    
+
     returns the given or a new dictionary with one or more of these keys
     'include_dirs', 'library_dirs', 'libraries'. Every key is a list of paths,
     so that it can be used with distutils Extension objects.
-    
+
     """
     if attrs is None:
         attrs = {}
@@ -123,9 +123,9 @@ if 'libraries' not in ext_args:
 # hack to provide our options to sip on its invocation:
 build_ext_base = sipdistutils.build_ext
 class build_ext(build_ext_base):
-    
+
     description = "Builds the popplerqt5 module."
-    
+
     user_options = build_ext_base.user_options + [
         ('poppler-version=', None, "version of the poppler library"),
         ('qmake-bin=', None, "Path to qmake binary"),
@@ -134,7 +134,7 @@ class build_ext(build_ext_base):
         ('pyqt-sip-dir=', None, "Path to PyQt's SIP files"),
         ('pyqt-sip-flags=', None, "SIP flags used to generate PyQt bindings")
     ]
-    
+
     def initialize_options (self):
         build_ext_base.initialize_options(self)
         self.poppler_version = None
@@ -232,10 +232,10 @@ class build_ext(build_ext_base):
 
     def write_version_sip(self, poppler_qt5_version, python_poppler_qt5_version):
         """Write a version.sip file.
-        
+
         The file contains code to make version information accessible from
         the popplerqt5 Python module.
-        
+
         """
         with open('version.sip', 'w') as f:
             f.write(version_sip_template.format(
@@ -243,22 +243,22 @@ class build_ext(build_ext_base):
                 vargs = ', '.join(map(format, python_poppler_qt5_version)),
                 pvlen = 'i' * len(poppler_qt5_version),
                 pvargs = ', '.join(map(format, poppler_qt5_version))))
-        
+
     def _find_sip(self):
         """override _find_sip to allow for manually speficied sip path."""
         return self.sip_bin or build_ext_base._find_sip(self)
-    
+
     def _sip_compile(self, sip_bin, source, sbf):
-        
+
         # First check manually specified poppler version
         ver = self.poppler_version or pkg_config_version('poppler-qt5') or ()
-        
+
         # our own version:
         version = tuple(map(int, re.findall(r'\d+', project['version'])))
-        
+
         # make those accessible from the popplerqt5 module:
         self.write_version_sip(ver, version)
-        
+
         # Disable features if older poppler-qt5 version is found.
         # See the defined tags in %Timeline{} in timeline.sip.
         tag = 'POPPLER_V0_20_0'
@@ -268,7 +268,7 @@ class build_ext(build_ext_base):
                     if ver < tuple(map(int, m.group(1, 2, 3))):
                         break
                     tag = m.group()
-        
+
         cmd = [sip_bin]
         if hasattr(self, 'sip_opts'):
             cmd += self.sip_opts
@@ -289,39 +289,39 @@ class build_ext(build_ext_base):
 if platform.system() == 'Windows':
    # Enforce libraries to link against on Windows
    ext_args['libraries'] = ['poppler-qt5', 'Qt5Core', 'Qt5Gui', 'Qt5Xml']
-   
+
    class bdist_support():
        def __find_poppler_dll(self):
            paths = os.environ['PATH'].split(";")
            poppler_dll = None
-           
+
            for path in paths:
                dll_path_candidate = os.path.join(path, "poppler-qt5.dll")
                if os.path.exists(dll_path_candidate):
                    return dll_path_candidate
-           
+
            return None
-       
+
        def _copy_poppler_dll(self):
            poppler_dll = self.__find_poppler_dll()
            if poppler_dll is None:
                self.warn("Could not find poppler-qt5.dll in any of the folders listed in the PATH environment variable.")
                return False
-               
+
            self.mkpath(self.bdist_dir)
            self.copy_file(poppler_dll, os.path.join(self.bdist_dir, "python-poppler5.dll"))
-           
+
            return True
-   
+
    import distutils.command.bdist_msi
    class bdist_msi(distutils.command.bdist_msi.bdist_msi, bdist_support):
        def run(self):
            if not self._copy_poppler_dll():
                return
            distutils.command.bdist_msi.bdist_msi.run(self)
-   
+
    project['cmdclass']['bdist_msi'] = bdist_msi
-   
+
    import distutils.command.bdist_wininst
    class bdist_wininst(distutils.command.bdist_wininst.bdist_wininst, bdist_support):
        def run(self):
@@ -329,7 +329,7 @@ if platform.system() == 'Windows':
                return
            distutils.command.bdist_wininst.bdist_wininst.run(self)
    project['cmdclass']['bdist_wininst'] = bdist_wininst
-   
+
    import distutils.command.bdist_dumb
    class bdist_dumb(distutils.command.bdist_dumb.bdist_dumb, bdist_support):
        def run(self):
@@ -337,7 +337,7 @@ if platform.system() == 'Windows':
                return
            distutils.command.bdist_dumb.bdist_dumb.run(self)
    project['cmdclass']['bdist_dumb'] = bdist_dumb
-   
+
    try:
        # Attempt to patch bdist_egg if the setuptools/distribute extension is installed
        import setuptools.command.bdist_egg
@@ -379,7 +379,7 @@ with open('README.rst', 'rb') as f:
     project["long_description"] = f.read().decode('utf-8')
 
 
-   
+
 project['cmdclass']['build_ext'] = build_ext
 setup(
     ext_modules = [Extension("popplerqt5", ["poppler-qt5.sip"], **ext_args)],
