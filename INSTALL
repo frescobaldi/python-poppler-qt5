@@ -7,12 +7,17 @@ python-poppler-qt5 installs a single Python module named 'popplerqt5'.
 The setup script uses distutils. Use the following commands to build and install
 the module:
 
-python setup.py build
-python setup.py install
+    python setup.py build
+    python setup.py install
 
 To install in /usr instead of /usr/local:
 
-python setup.py install --prefix /usr
+    python setup.py install --prefix /usr
+
+
+You can also use the newer way of installing using pip:
+
+    python -m pip install .
 
 
 Troubleshooting:
