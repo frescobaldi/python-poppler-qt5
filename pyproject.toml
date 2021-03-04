@@ -4,7 +4,7 @@ build-backend = "sipbuild.api"
 
 [tool.sip.metadata]
 name = "python-poppler-qt5"
-version = "21.1.0"
+version = "21.3.0"
 summary = "A Python binding to Poppler-Qt5"
 description-file = "README.rst"
 home-page = "https://github.com/frescobaldi/python-poppler-qt5"
