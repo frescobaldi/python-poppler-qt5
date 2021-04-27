@@ -42,7 +42,7 @@ class PopplerQt5Bindings(PyQtBindings):
     def run_pkg_config(option):
         output = subprocess.check_output(
             ['pkg-config', option, 'poppler-qt5'],
-            text=True)
+            universal_newlines=True)
         return output.rstrip()
 
     def apply_user_defaults(self, tool):
