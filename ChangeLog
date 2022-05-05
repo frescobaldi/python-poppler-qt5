@@ -1,6 +1,6 @@
 ChangeLog of python-poppler-qt5
 
-Version 21.3.0 --
+Version 21.3.0 -- May 5th, 2022
 
 * Fix #43: Building 21.1.0 fails with unsupported function return type
   by Ben Greiner (thanks!)
