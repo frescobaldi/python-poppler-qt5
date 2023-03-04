@@ -1,0 +1,22 @@
+name: python-poppler-qt5-wheels
+channels:
+  - conda-forge
+dependencies:
+  # Note that the versions are all pinned; it speeds up the resolver (which
+  # is already very slow) when it only has to find the versions of the transitive
+  # dependencies.
+  - pyqt=5.15.9
+  - sip=6.7.11
+  - pyqt-builder=1.15.2
+  - cmake=3.26.4
+  - openjpeg=2.5.0
+  - jpeg=9e
+  # Provides C and C++ compilers which are guaranteed ABI-compatible with
+  # Qt5, libjpeg and libopenjp2 from conda-forge.
+  - compilers=1.6.0
+  - boost-cpp
+  # Obscure: sip needs setuptools, but it's not marked as dependency.
+  - setuptools=68.0.0
+  - wheel
+platforms:
+  - linux-64

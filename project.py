@@ -14,6 +14,7 @@ class PythonPopplerQt5(PyQtProject):
     def __init__(self):
         super().__init__()
         self.bindings_factories = [PopplerQt5Bindings]
+        self.wheel_includes = ["popplerqt5.py"]
 
     def update(self, tool):
         """Allows SIP to find PyQt5 .sip files."""
@@ -36,6 +37,10 @@ class PopplerQt5Bindings(PyQtBindings):
             Option('poppler_version',
                    help='version of the poppler library',
                    metavar='VERSION'))
+        options.append(
+            Option('link_args',
+                   help='linker arguments',
+                   metavar='ARGS'))
         return options
 
     @staticmethod
@@ -86,3 +91,8 @@ class PopplerQt5Bindings(PyQtBindings):
             tag = 'POPPLER_V0_20_0'
         self.tags.append(tag)
         super().apply_user_defaults(tool)
+
+
+        # Allow passing linker arguments, needed for RUNPATH
+        # in the CI build.
+        self.extra_link_args = self.link_args.split()

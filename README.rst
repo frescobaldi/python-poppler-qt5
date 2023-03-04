@@ -24,12 +24,6 @@ Documentation
 The Python API closely follows the Poppler Qt5 C++ interface library API,
 documented at https://poppler.freedesktop.org/api/qt5/ .
 
-Note: Releases of PyQt5 < 5.4 currently do not support the QtXml module,
-all methods that use the QDomDocument, QDomElement and QDomNode types are
-disabled. This concerns the ``Document::toc()`` method and some constructors
-and the ``store()`` methods in the ``Annotation`` subclasses. So, using
-PyQt5 >= 5.4 is recommended.
-
 Wherever the C++ API requires ``QList``, ``QSet`` or ``QLinkedList``, any
 Python sequence can be used. API calls that return ``QList``, ``QSet`` or
 ``QLinkedList`` all return Python lists.
@@ -71,4 +65,3 @@ functions:
     This is determined at build time. If at build time the Poppler-Qt5 version
     could not be determined and was not specified, an empty tuple might be
     returned.
-

@@ -1,5 +1,10 @@
 [build-system]
-requires = ["sip >=5", "PyQt-builder", "PyQt5"]
+requires = [
+  "sip >= 6.7.9",
+  "PyQt-builder",
+  "PyQt5",
+  "PyQt5-Qt5",
+]
 build-backend = "sipbuild.api"
 
 [tool.sip.metadata]
@@ -21,7 +26,10 @@ classifier = [
   "Programming Language :: Python :: 3",
   "Topic :: Multimedia :: Graphics :: Viewers"
 ]
-requires-dist = "PyQt5"
+requires-dist = [
+  # sync with ci/environment/environment.yml
+  "PyQt5 >= 5.15",
+]
 
 [tool.sip.project]
 sip-files-dir = "."

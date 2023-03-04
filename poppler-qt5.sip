@@ -1,4 +1,4 @@
-%Module(name=popplerqt5)
+%Module(name=PyQt5.Qt5.lib._popplerqt5)
 
 /*
  * Bindings for Poppler-Qt5 to Python
