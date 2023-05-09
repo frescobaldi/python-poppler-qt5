@@ -1,5 +1,10 @@
 ChangeLog of python-poppler-qt5
 
+Unreleased
+
+* Remove build system for the unsupported sip v4; used sip v5 or
+  v6 instead (Jean Abou Samra)
+
 Version 21.3.0 -- May 5th, 2022
 
 * Fix #43: Building 21.1.0 fails with unsupported function return type
@@ -30,4 +35,3 @@ Version 0.24.0 -- Feb 2015
 * Initial release, converted from the python-poppler-qt4 code.
 * Disabled the methods that use QDomNode, QDomDocument and QDomElement types,
   those are unfortunately not supported by PyQt5.
-
