@@ -5,18 +5,21 @@ on: [push, pull_request]
 # versions and macOS / Windows.
 
 jobs:
-  build_wheels_linux:
-    name: Build Linux wheels
-    # The Docker container the job is run in.
-    container: quay.io/pypa/manylinux2014_x86_64
+  build_wheels:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    name: Build wheels
     # The host system that runs Docker.
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    # The Docker container the job is run in.
+    container: ${{ matrix.os == 'ubuntu-latest' && 'quay.io/pypa/manylinux2014_x86_64' || null }}
     steps:
       - uses: actions/checkout@v3
       - uses: conda-incubator/setup-miniconda@v2
         with:
           miniconda-version: latest
-          environment-file: ci/environment/conda-linux-64.lock
+          environment-file: ${{ matrix.os == 'ubuntu-latest' && 'ci/environment/conda-linux-64.lock' || 'ci/environment/conda-osx-64.lock' }}
       - name: Build the wheels
         # The following line here and elsewhere is needed for our Conda environment to
         # be activated. See:
