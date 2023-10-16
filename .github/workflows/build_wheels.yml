@@ -1,0 +1,28 @@
+on: [push, pull_request]
+
+
+# For now only Linux wheels with Python 3.11. TODO: cover other Python
+# versions and macOS / Windows.
+
+jobs:
+  build_wheels_linux:
+    name: Build Linux wheels
+    # The Docker container the job is run in.
+    container: quay.io/pypa/manylinux2014_x86_64
+    # The host system that runs Docker.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: conda-incubator/setup-miniconda@v2
+        with:
+          miniconda-version: latest
+          environment-file: ci/environment/conda-linux-64.lock
+      - name: Build the wheels
+        # The following line here and elsewhere is needed for our Conda environment to
+        # be activated. See:
+        # https://github.com/marketplace/actions/setup-miniconda#important
+        shell: bash -el {0}
+        run: ci/build.sh
+      - uses: actions/upload-artifact@v3
+        with:
+          path: "fixed-wheel/*.whl"
